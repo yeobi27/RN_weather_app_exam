@@ -1,41 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
+// App.tsx (예시: Stack Navigation 구조)
+
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RootStackParamList } from './src/navigation/types';
+
+import HomeScreen from './src/screens/HomeScreen';
+import WishWriteScreen from './src/screens/WishWriteScreen';
+
+const Stack = createNativeStackNavigator<RootStackParamList>(); // 타입 추가!
 
 export default function App() {
-  const [number, setNumber] = useState(0);
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>결과 : {number}</Text>
-      <View style={{flexDirection: 'row'}}>
-        <Button 
-        title="증가"
-        onPress={() => {
-          setNumber(number + 1);
-        }}
-      />
-        <Button 
-          title="감소"
-          onPress={() => {
-            setNumber(number - 1);
-          }}
-      />
-      </View>
-      <StatusBar style="auto" />  // style: "auto" | "inverted" | "light" | "dark"
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Sona">
+        <Stack.Screen name="Sona" component={HomeScreen} />
+        <Stack.Screen name="WishWrite" component={WishWriteScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',    
-  },
-});
